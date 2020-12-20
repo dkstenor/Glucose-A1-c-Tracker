@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import { Form, FormGroup, Label, Input, FormText, Button, Container, Row } from 'reactstrap';
 import axios from 'axios';
 import PageHeader from './PageHeader';
@@ -35,7 +36,11 @@ function HomePage() {
           .catch(error => console.log(error));
         }
           
-
+    if (sessionStorage.getItem('loggedin')) {
+        return (
+            <Redirect to='/landingpage' />
+        )
+    }
     return (
       <React.Fragment>
         <PageHeader>

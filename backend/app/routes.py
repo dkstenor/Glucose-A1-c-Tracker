@@ -28,20 +28,14 @@ class AddUser(Resource):
 
 class Login(Resource):
   def post(self):
-    data = request.get_json()
-    uname = data["username"]
-    password = data["password"]
+    uname = request.form.get('username')
+    password = request.form.get('password')
     user = User.query.filter_by(username=uname).first()
     if user is None:
-      return {"message": "User Not Found"}
+      return {"message": "User Not Found"}, 401
     if not user.check_password(password):
-      return {"message": "Password not recognized"}
-    response = app.response_class(
-        response=json.dumps(uname),
-        status=200,
-        mimetype='application/json'
-    )
-    return response
+      return {"message": "Password not recognized"},401
+    return {"message": "Success"}, 200
 
 
 class PostReading(Resource): 
