@@ -28,8 +28,9 @@ class AddUser(Resource):
 
 class Login(Resource):
   def post(self):
-    uname = request.form.get('username')
-    password = request.form.get('password')
+    req_data = request.get_json()
+    uname = req_data['username']
+    password = req_data['password']
     user = User.query.filter_by(username=uname).first()
     if user is None:
       return {"message": "User Not Found"}, 401
