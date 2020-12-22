@@ -35,7 +35,7 @@ class Login(Resource):
     if user is None:
       return {"message": "User Not Found"}, 401
     if not user.check_password(password):
-      return {"message": "Password not recognized"},401
+      return {"message": "Password not recognized"}, 401
     return {"message": "Success"}, 200
 
 

@@ -4,12 +4,17 @@ import { Form, FormGroup, Label, Input, FormText, Button, Container, Row } from 
 import axios from 'axios';
 import PageHeader from './PageHeader';
 
-function HomePage() {
+function LoginPage() {
 
     const [formData, setFormData] = useState({
         username: '',
         password: ''
     });
+
+    const [errorMsg, setErrorMsg] = useState({
+        errorNo: '',
+        errorText: ''
+    })
     
     function handleChange(e) {
         setFormData({
@@ -33,7 +38,12 @@ function HomePage() {
             password: formData.password
           })
           .then(handleResponse)
-          .catch(error => console.log(error));
+          .catch(error => {
+              setErrorMsg({
+                  errorNo: error.response.status,
+                  errorText: error.response.data.message
+              });
+          })
         }
           
     if (sessionStorage.getItem('loggedin')) {
@@ -43,11 +53,11 @@ function HomePage() {
     }
     return (
       <React.Fragment>
-        <PageHeader>
-            Log In
-        </PageHeader>
         <Container  className="mt-5 w-25 p-3 mr-3px">
         <Form onSubmit={handleSubmit} autoComplete="off">
+            <FormText>
+                <h3 style={{color: 'red'}}>{errorMsg.errorText}</h3>
+            </FormText>
             <FormGroup style={{textAlign: "left"}} id="username">
                 <Label>Username</Label>
                 <Input style={{width: "95%"}} placeholder="Enter username" name="username" value={formData.username} onChange={handleChange}/>
@@ -71,4 +81,4 @@ function HomePage() {
     )
 }
 
-export default HomePage;
+export default LoginPage;

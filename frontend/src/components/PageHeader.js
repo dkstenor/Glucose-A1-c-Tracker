@@ -13,8 +13,6 @@ function PageHeader(props) {
                             <Link to="/" className="nav-link text-dark" active >Home</Link>
                         </NavItem>
                         <NavItem>
-                            <Link to="/login" className="nav-link text-dark" active >Login</Link>
-                        </NavItem>                        <NavItem>
                             <Link to="/postreadings" className="nav-link text-dark" active>Add Glucose Reading</Link>
                         </NavItem>
                         <NavItem>
