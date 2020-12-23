@@ -1,6 +1,5 @@
 import React from 'react';
 import PageHeader from './PageHeader';
-import LoginPage from './LoginPage';
 
 function HomePage(){
     return(
@@ -8,9 +7,6 @@ function HomePage(){
         <PageHeader>
             Welcome
         </ PageHeader>
-        <LoginPage>
-            Log In
-        </LoginPage>
         </>
     )
 }

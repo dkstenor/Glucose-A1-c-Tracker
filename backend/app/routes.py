@@ -24,7 +24,7 @@ class AddUser(Resource):
     new_user.set_password(password)
     db.session.add(new_user)  # Adds new User record to database
     db.session.commit()  # Commits all changes
-    return {"message": "User successfully created"}
+    return {'message': f'User {uname} was created'}, 200
 
 class Login(Resource):
   def post(self):

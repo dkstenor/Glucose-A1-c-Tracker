@@ -5,6 +5,7 @@ import AddReadings from './components/AddReadings';
 import ViewReadings from './components/ViewReadings';
 import AddUserPage from './components/AddUserPage';
 import LandingPage from './components/LandingPage';
+import LogoutPage from './components/LogoutPage';
 import { Route, Switch } from 'react-router-dom';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/login" component={LoginPage} exact />
         <Route path="/adduser" component={AddUserPage} exact />
         <Route path="/landingpage" component={LandingPage} exact />
+        <Route path="/logout" component={LogoutPage} exact />
       </Switch>
     </main>
   );

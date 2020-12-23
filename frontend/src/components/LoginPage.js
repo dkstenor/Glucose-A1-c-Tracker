@@ -24,7 +24,8 @@ function LoginPage() {
       }
       function handleResponse(response) {
             if (response.status === 200)
-                sessionStorage.setItem('loggedin', 'True');
+                localStorage.setItem('isLoggedIn', 'True');
+                localStorage.setItem('username', formData.username);
             setFormData({
                 username: '',
                 password: ''
@@ -46,13 +47,16 @@ function LoginPage() {
           })
         }
           
-    if (sessionStorage.getItem('loggedin')) {
+    if (localStorage.getItem('isLoggedIn')) {
         return (
             <Redirect to='/landingpage' />
         )
     }
     return (
       <React.Fragment>
+        <PageHeader>
+            Welcome
+        </PageHeader>
         <Container  className="mt-5 w-25 p-3 mr-3px">
         <Form onSubmit={handleSubmit} autoComplete="off">
             <FormText>
