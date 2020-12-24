@@ -64,7 +64,7 @@ function LoginPage() {
             </FormText>
             <FormGroup style={{textAlign: "left"}} id="username">
                 <Label>Username</Label>
-                <Input style={{width: "95%"}} placeholder="Enter username" name="username" value={formData.username} onChange={handleChange}/>
+                <Input autoFocus={true} style={{width: "95%"}} placeholder="Enter username" name="username" value={formData.username} onChange={handleChange}/>
             </FormGroup>
 
             <FormGroup style={{textAlign: "left"}} id="password">

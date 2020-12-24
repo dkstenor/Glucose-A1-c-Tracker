@@ -1,4 +1,4 @@
-import {Jumbotron, Container, NavItem, Navbar, NavbarBrand, Nav } from 'reactstrap';
+import {Jumbotron, Container, NavItem, Navbar, NavLink, NavbarBrand, Nav, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 
@@ -8,19 +8,14 @@ function PageHeader(props) {
             <header>
                 <Navbar fixed expand="md" style={{backgroundColor: "lavender"}}>
                         <NavbarBrand className="text-dark" href='/'>Glucose/A1c Tracker</NavbarBrand>
-                            <Nav className="mr-auto container-fluid" navbar>
-                            <NavItem>
-                                <Link to="/" className="nav-link text-dark" active >Home</Link>
-                            </NavItem>
-                            <NavItem>
-                            <   Link to="/postreadings" className="nav-link text-dark" active>Add Glucose Reading</Link>
-                            </NavItem>
-                            <NavItem>
-                                <Link to="/viewreadings" className="nav-link text-dark" active>View Readings</Link>
-                            </NavItem>
-                                <NavItem className="ml-auto"> 
-                                    <Link to="/logout" className="nav-link text-dark" active>Log Out</Link>
-                                </NavItem>
+                            <Nav className="mr-auto" navbar>
+                            </Nav>
+                            <Nav>
+                                <NavLink href="/postreadings" className="nav-link text-dark" active>Add Glucose Reading</NavLink>
+                                <NavLink href="/viewreadings" className="nav-link text-dark" active>View Readings</NavLink>
+                                <Button tag={Link} to="/logout" className="mx-auto mb-3" variant="outline-dark" style={{backgroundColor: "lavender", color: "black"}}>
+                                    Log Out
+                                </Button>
                             </Nav>
                 </Navbar>
             
@@ -39,7 +34,10 @@ function PageHeader(props) {
                     <NavbarBrand className="text-dark" href='/'>Glucose/A1c Tracker</NavbarBrand>
                         <Nav className="mr-auto container-fluid" navbar>
                             <NavItem className="ml-auto"> 
-                                <Link to="/login" className="nav-link text-dark" active>Log In</Link>
+                                {/* <Link to="/login" className="nav-link text-dark" active>Log In</Link> */}
+                                <Button tag={Link} to="/login" className="mx-auto mb-3" variant="outline-dark" style={{backgroundColor: "lavender", color: "black"}}>
+                                    Log In
+                                </Button>
                             </NavItem>
                         </Nav>
             </Navbar>
