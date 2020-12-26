@@ -35,8 +35,12 @@ function PageHeader(props) {
                         <Nav className="mr-auto container-fluid" navbar>
                             <NavItem className="ml-auto"> 
                                 {/* <Link to="/login" className="nav-link text-dark" active>Log In</Link> */}
-                                <Button tag={Link} to="/login" className="mx-auto mb-3" variant="outline-dark" style={{backgroundColor: "lavender", color: "black"}}>
+                                <Button tag={Link} to="/login" className="mx-auto mb-3 ml-3" variant="outline-dark" style={{backgroundColor: "lavender", color: "black"}}>
                                     Log In
+                                </Button>
+                                &nbsp;&nbsp;or&nbsp;&nbsp;
+                                <Button tag={Link} to="/register" className="mx-auto mb-3" variant="outline-dark" style={{backgroundColor: "lavender", color: "black"}}>
+                                    Sign Up
                                 </Button>
                             </NavItem>
                         </Nav>

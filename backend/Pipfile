@@ -14,7 +14,6 @@ flask-marshmallow = "*"
 marshmallow-sqlalchemy = "*"
 psycopg2 = "*"
 psycopg2-binary = "*"
-flask-jwt-extended = "*"
 
 [requires]
 python_version = "3.8"
