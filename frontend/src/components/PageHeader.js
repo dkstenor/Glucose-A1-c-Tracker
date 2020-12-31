@@ -11,7 +11,7 @@ function PageHeader(props) {
                             <Nav className="mr-auto" navbar>
                             </Nav>
                             <Nav>
-                                <NavLink href="/postreadings" className="nav-link text-dark" active>Add Glucose Reading</NavLink>
+                                <NavLink href="/addreading" className="nav-link text-dark" active>Add Glucose Reading</NavLink>
                                 <NavLink href="/viewreadings" className="nav-link text-dark" active>View Readings</NavLink>
                                 <Button tag={Link} to="/logout" className="mx-auto mb-3" variant="outline-dark" style={{backgroundColor: "lavender", color: "black"}}>
                                     Log Out

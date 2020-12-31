@@ -3,6 +3,7 @@ from flask import Flask, session, request, json, render_template
 from flask_restful import Resource, Api, abort, reqparse
 from flask_sqlalchemy import SQLAlchemy 
 from .models import User, UserSchema, Reading, ReadingSchema
+from datetime import datetime
 
 class GetUsers(Resource):
   def get(self):
@@ -43,16 +44,20 @@ class Login(Resource):
     return {"message": "Success"}, 200
 
 
-class PostReading(Resource): 
+class AddReading(Resource): 
   def post(self):
-    username = request.form.get("username")
-    reading = request.form.get("my_reading")
-    date = request.form.get("reading_date")
-    time = request.form.get("reading_time")
-    new_reading = Reading(username=username, my_reading=reading, reading_date=date, reading_time=time)
-    db.session.add(new_reading)
-    db.session.commit()
-    return {"message": "Reading successfully created"}
+    req_data = request.get_json()
+    try:
+      username = req_data['username']
+      reading = req_data['reading']
+      date_time = req_data['readingDate']
+      date_time_obj = datetime.strptime(date_time, '%m-%d-%Y %H:%M')
+      new_reading = Reading(username=username, my_reading=reading, reading_date_time=date_time_obj)
+      db.session.add(new_reading)
+      db.session.commit()
+      return {"message": "Reading successfully added"}, 200
+    except:
+      return {"message": "Error adding reading"}, 401
 
 @app.route("/")
 def hello():
@@ -61,6 +66,6 @@ def hello():
 api.add_resource(GetUsers, '/getusers')
 api.add_resource(AddUser, '/register')
 api.add_resource(Login, '/login')
-api.add_resource(PostReading, '/postreading')
+api.add_resource(AddReading, '/addreading')
 
 

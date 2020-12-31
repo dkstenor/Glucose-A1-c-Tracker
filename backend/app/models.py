@@ -33,8 +33,8 @@ class Reading(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(35), nullable=False)
     my_reading = db.Column(db.Integer, nullable=False)
-    reading_date = db.Column(db.Date, nullable=False)
-    reading_time = db.Column(db.Time, nullable=False)
+    reading_date_time = db.Column(db.DateTime, nullable=False)
+    # reading_time = db.Column(db.Time, nullable=False)
 
     def __repr__(self):
         return f'(<User {self.username} {self.reading}>)'

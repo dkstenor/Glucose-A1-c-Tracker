@@ -4,7 +4,7 @@ import PageHeader from './PageHeader';
 function ViewReadings(){
     return(
         <PageHeader>
-            View Glucose Readings
+            Display Glucose Readings
         </ PageHeader>
     )
 }

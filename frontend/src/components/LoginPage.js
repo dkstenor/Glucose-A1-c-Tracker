@@ -49,7 +49,7 @@ function LoginPage() {
           
     if (localStorage.getItem('isLoggedIn')) {
         return (
-            <Redirect to='/landingpage' />
+            <Redirect to='/readingpage' />
         )
     }
     return (
@@ -77,7 +77,7 @@ function LoginPage() {
             </Button>
             </Row>
             <FormText className="text-muted">
-                Don't have an Account?  Click <a href="/adduser" active>here</a> to sign up.
+                Don't have an Account?  Click <a href="/register" active>here</a> to sign up.
             </FormText>
         </Form>
         </Container>
