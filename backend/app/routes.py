@@ -4,6 +4,7 @@ from flask_restful import Resource, Api, abort, reqparse
 from flask_sqlalchemy import SQLAlchemy 
 from .models import User, UserSchema, Reading, ReadingSchema
 from datetime import datetime
+from dateutil.parser import parse
 
 class GetUsers(Resource):
   def get(self):
@@ -51,7 +52,7 @@ class AddReading(Resource):
       username = req_data['username']
       reading = req_data['reading']
       date_time = req_data['readingDate']
-      date_time_obj = datetime.strptime(date_time, '%m-%d-%Y %H:%M')
+      date_time_obj = parse(date_time)
       new_reading = Reading(username=username, my_reading=reading, reading_date_time=date_time_obj)
       db.session.add(new_reading)
       db.session.commit()

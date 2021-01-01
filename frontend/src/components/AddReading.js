@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Form, FormText, FormGroup, Label, Input, Button, Container, Row } from 'reactstrap';
 import axios from 'axios';
+import DateTimePicker from 'react-datetime-picker';
 import PageHeader from './PageHeader';
 
 function AddReading() {
@@ -16,6 +17,8 @@ function AddReading() {
     })
 
     const [msg, setMsg] = useState('')
+
+    const [dateValue, onDateChange] = useState(new Date());
     
     
     function handleChange(e) {
@@ -41,7 +44,7 @@ function AddReading() {
         axios.post('/addreading', {
             username: localStorage.getItem('username'),
             reading: formData.reading,
-            readingDate: formData.readingDate,
+            readingDate: dateValue
           })
           .then(handleResponse)
           .catch(error => {
@@ -70,8 +73,13 @@ function AddReading() {
                     <Input autoFocus={true} style={{width: "95%"}} placeholder="Glucose Reading" name="reading" value={formData.reading} onChange={handleChange}/>
                 </FormGroup>
                 <FormGroup style={{textAlign: 'left'}} id="readingDate">
-                    <Label>Reading Date/Time</Label>
-                    <Input style={{width: "95%"}} placeholder="Reading Date/Time" name="readingDate" value={formData.readingDate} onChange={handleChange}/>
+                    <Label>Reading Date/Time</Label> <br />
+                        <DateTimePicker
+                            onChange={onDateChange}
+                            disableClock={true}
+                            value={dateValue}
+                        />
+                    {/* <Input style={{width: "95%"}} placeholder="Reading Date/Time" name="readingDate" value={formData.readingDate} onChange={handleChange}/> */}
                 </FormGroup>
             <Row>
                 <Button className="mx-auto mb-3" variant="outline-dark" style={{backgroundColor: "lavender", color: "black"}} type="submit">
