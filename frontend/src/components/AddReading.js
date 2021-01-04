@@ -42,7 +42,7 @@ function AddReading() {
             errorText: ''
         })
         axios.post('/addreading', {
-            username: localStorage.getItem('username'),
+            username: sessionStorage.getItem('username'),
             reading: formData.reading,
             readingDate: dateValue
           })

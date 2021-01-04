@@ -60,6 +60,14 @@ class AddReading(Resource):
     except:
       return {"message": "Error adding reading"}, 401
 
+class ViewSingleReading(Resource):
+  def get(self):
+    pass
+
+class ViewRangeReadings(Resource):
+  def get(self):
+    pass
+
 @app.route("/")
 def hello():
     return render_template("index.html")
@@ -68,5 +76,7 @@ api.add_resource(GetUsers, '/getusers')
 api.add_resource(AddUser, '/register')
 api.add_resource(Login, '/login')
 api.add_resource(AddReading, '/addreading')
+api.add_resource(ViewSingleReading, '/getdatedata')
+api.add_resource(ViewRangeReadings, '/getrangedata')
 
 

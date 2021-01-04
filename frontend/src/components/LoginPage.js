@@ -24,8 +24,8 @@ function LoginPage() {
       }
       function handleResponse(response) {
             if (response.status === 200)
-                localStorage.setItem('isLoggedIn', 'True');
-                localStorage.setItem('username', formData.username);
+                sessionStorage.setItem('isLoggedIn', 'True');
+                sessionStorage.setItem('username', formData.username);
             setFormData({
                 username: '',
                 password: ''
@@ -47,7 +47,7 @@ function LoginPage() {
           })
         }
           
-    if (localStorage.getItem('isLoggedIn')) {
+    if (sessionStorage.getItem('isLoggedIn')) {
         return (
             <Redirect to='/readingpage' />
         )

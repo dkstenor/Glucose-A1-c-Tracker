@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 
 function PageHeader(props) {
-    if (localStorage.getItem('isLoggedIn')) {
+    if (sessionStorage.getItem('isLoggedIn')) {
         return (
             <header>
                 <Navbar fixed expand="md" style={{backgroundColor: "lavender"}}>
