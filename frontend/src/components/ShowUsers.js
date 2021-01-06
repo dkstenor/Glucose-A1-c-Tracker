@@ -7,7 +7,7 @@ function ShowUsers() {
     
     const [users, setUsers] = useState([]);
     
-    useEffect(getUsers => {
+    useEffect(() => {
         axios.get('/getusers')
         .then(({data: users}) => {
             setUsers(users);

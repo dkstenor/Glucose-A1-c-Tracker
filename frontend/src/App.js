@@ -6,6 +6,8 @@ import ViewReadingsPage from './components/ViewReadingsPage';
 import RegisterPage from './components/RegisterPage';
 import ReadingPage from './components/ReadingPage';
 import LogoutPage from './components/LogoutPage';
+import GetDateData from './components/GetDateData';
+import GetRangeData from './components/GetRangeData';
 import { Route, Switch } from 'react-router-dom';
 
 function App() {
@@ -19,6 +21,8 @@ function App() {
         <Route path="/register" component={RegisterPage} exact />
         <Route path="/readingpage" component={ReadingPage} exact />
         <Route path="/logout" component={LogoutPage} exact />
+        <Route path="/getdatedata" component={GetDateData} exact />
+        <Route path="/getrangedata" component={GetRangeData} exact />
       </Switch>
     </main>
   );

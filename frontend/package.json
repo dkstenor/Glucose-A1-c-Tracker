@@ -10,10 +10,11 @@
     "bootstrap": "^4.5.3",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",
-    "react-datetime-picker": "^3.0.4",
+    "react-date-picker": "^8.0.5",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "react-time-picker": "^4.1.1",
     "reactstrap": "^8.7.1",
     "web-vitals": "^0.2.4"
   },

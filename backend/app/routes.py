@@ -51,26 +51,38 @@ class AddReading(Resource):
     try:
       username = req_data['username']
       reading = req_data['reading']
-      date_time = req_data['readingDate']
-      date_time_obj = parse(date_time)
-      new_reading = Reading(username=username, my_reading=reading, reading_date_time=date_time_obj)
+      reading_date = req_data['readingDate']
+      reading_time = req_data['readingTime']
+      date_time_obj = parse(reading_date)
+      reading_date = date_time_obj.date()
+      new_reading = Reading(username=username, my_reading=reading, reading_date=reading_date, reading_time=reading_time)
       db.session.add(new_reading)
       db.session.commit()
       return {"message": "Reading successfully added"}, 200
     except:
-      return {"message": "Error adding reading"}, 401
+      return {"message": "Error adding reading"}, 500
 
 class ViewSingleReading(Resource):
-  def get(self):
-    pass
+  def post(self):
+    req_data = request.get_json()
+    username = req_data['username']
+    readingdate = req_data['date']
+    date_obj = parse(readingdate)
+    data = Reading.query.filter_by(username=username, reading_date=date_obj).all()
+    if not data:
+      return {"message": "No Data Found for Date"}, 500
+    reading_schema = ReadingSchema(many=True)
+    ret_data = reading_schema.dump(data)
+    return ret_data
+
 
 class ViewRangeReadings(Resource):
   def get(self):
     pass
 
-@app.route("/")
-def hello():
-    return render_template("index.html")
+# @app.route("/")
+# def hello():
+#     return render_template("index.html")
 
 api.add_resource(GetUsers, '/getusers')
 api.add_resource(AddUser, '/register')
