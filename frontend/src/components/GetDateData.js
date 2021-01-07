@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Container, Row, Col, Button, Table } from "reactstrap";
+import { Container, Row, Col, Button } from "reactstrap";
 import DatePicker from "react-date-picker";
 import PageHeader from './PageHeader';
+import ChartData from './ChartData';
 
 function GetDateData () {
 
@@ -74,37 +75,7 @@ function GetDateData () {
                         <Col></Col>
                     </Row>
                 </Container>
-                <Container>
-                    <Row>
-                        <Col md={4}>
-                            <Table responsive striped size='sm' bordered>
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            Reading Time
-                                        </th>
-                                        <th>
-                                            Reading
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {data.map(data => 
-                                    <tr>
-                                        <td>{data.reading_time}</td>
-                                        <td>{data.my_reading}</td>
-                                    </tr>
-                                    )
-                                    }
-                                </tbody>
-                            </Table>
-                        </Col>
-                        <Col md={2}>
-                            Average:
-                        </Col>
-                        <Col>Chart goes here</Col>
-                    </Row>
-                </Container>
+            <ChartData data={data} />
     </React.Fragment>
     );
 }
