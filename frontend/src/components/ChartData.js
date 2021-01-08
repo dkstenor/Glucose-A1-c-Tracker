@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Container, Row, Col, Button, Table } from "reactstrap";
+import PageHeader from './PageHeader';
 
 function ChartData (props) {
 
@@ -15,10 +16,11 @@ function ChartData (props) {
 
     return (
         <React.Fragment>
+            <PageHeader>Display Data for [date]</PageHeader>
             <Container>
                 <Row>
                     <Col md={4}>
-                        <Table responsive striped size='sm' bordered>
+                        <Table responsive striped size='sm' bordered id='readingTable'>
                             <thead>
                                 <tr>
                                     <th>

@@ -11,6 +11,8 @@ function GetDateData () {
 
     const [data, setData] = useState([]);
 
+    const [isClicked, setIsClicked] = useState(false);
+
     const [errorMsg, setErrorMsg] = useState({
         errorNo: '',
         errorText: ''
@@ -26,6 +28,7 @@ function GetDateData () {
 
     function handleSubmit(event) {
         event.preventDefault();
+        setIsClicked(true);
         axios.post('/getdatedata', {
             username: sessionStorage.getItem('username'),
             date: dateValue
@@ -38,7 +41,11 @@ function GetDateData () {
               });
           })
         }
-
+        if(isClicked) {
+            return(
+            <ChartData data={data} />
+            )
+        }
     return (
         <React.Fragment>
             <PageHeader>Glucose Readings</PageHeader>
@@ -75,7 +82,6 @@ function GetDateData () {
                         <Col></Col>
                     </Row>
                 </Container>
-            <ChartData data={data} />
     </React.Fragment>
     );
 }
