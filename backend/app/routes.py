@@ -1,9 +1,9 @@
 from app import app, db, api, ma
-from flask import Flask, session, request, json, render_template
+from flask import Flask, session, request, json, render_template, jsonify
 from flask_restful import Resource, Api, abort, reqparse
 from flask_sqlalchemy import SQLAlchemy 
 from .models import User, UserSchema, Reading, ReadingSchema
-from datetime import datetime
+from datetime import datetime, timedelta
 from dateutil.parser import parse
 
 class GetUsers(Resource):
@@ -62,7 +62,7 @@ class AddReading(Resource):
     except:
       return {"message": "Error adding reading"}, 500
 
-class ViewSingleReading(Resource):
+class GetDateData(Resource):
   def post(self):
     req_data = request.get_json()
     username = req_data['username']
@@ -76,9 +76,24 @@ class ViewSingleReading(Resource):
     return ret_data
 
 
-class ViewRangeReadings(Resource):
-  def get(self):
-    pass
+class GetRangeData(Resource):
+  def post(self):
+    ret_data = []
+    avg = 0
+    req_data = request.get_json()
+    username = req_data['username']
+    start_date = req_data['startdate']
+    end_date = req_data['enddate']
+    start_date_obj = parse(start_date)
+    end_date_obj = parse(end_date)
+    while start_date_obj <= end_date_obj:
+      data = Reading.query.filter_by(username=username, reading_date=start_date_obj).all()
+      avg = sum(d.my_reading for d in data) / len(data)
+      ret_data.append({'reading_date': start_date_obj.strftime('%m/%d/%Y'), 'avg': round(avg, 2)})
+      start_date_obj += timedelta(days=1) 
+    if not data:
+      return {"message": "No Data Found for Date"}, 500
+    return ret_data
 
 # @app.route("/")
 # def hello():
@@ -88,7 +103,7 @@ api.add_resource(GetUsers, '/getusers')
 api.add_resource(AddUser, '/register')
 api.add_resource(Login, '/login')
 api.add_resource(AddReading, '/addreading')
-api.add_resource(ViewSingleReading, '/getdatedata')
-api.add_resource(ViewRangeReadings, '/getrangedata')
+api.add_resource(GetDateData, '/getdatedata')
+api.add_resource(GetRangeData, '/getrangedata')
 
 

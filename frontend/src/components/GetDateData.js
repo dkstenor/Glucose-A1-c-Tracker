@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import moment from 'moment';
 import { Container, Row, Col, Button } from "reactstrap";
 import DatePicker from "react-date-picker";
 import PageHeader from './PageHeader';
-import ChartData from './ChartData';
+import MakeTable from './MakeTable';
+import MakeAverage from './MakeAverage';
+import MakeChart from './MakeChart';
 
 function GetDateData () {
 
@@ -43,7 +46,31 @@ function GetDateData () {
         }
         if(isClicked) {
             return(
-            <ChartData data={data} />
+                <React.Fragment>
+                    <PageHeader>Glucose Readings for {moment(dateValue).format('MM/DD/YYYY')}</PageHeader>
+                <Container>
+                    <Row>
+                        <Col md={4}></Col>
+                        <Col md={3}>
+                            <MakeTable data={data} />
+                        </Col>
+                        <Col md={2}>
+                            <MakeAverage data={data} />
+                        </Col>
+                        <Col md={4}></Col>
+                        </Row>
+                        </Container>
+                        <Container>
+                            <Row>
+                                <Col md={2}></Col>
+                                <Col>
+                                    <MakeChart data={data} />
+                                </Col>
+                                <Col md={2}></Col>
+                            </Row>
+                        </Container>
+                        
+            </React.Fragment>
             )
         }
     return (
