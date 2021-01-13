@@ -48,11 +48,11 @@ function GetRangeData () {
                             <MakeRangeTable data={data} />
                         </Col>
                         <Col>
-                            {/* <MakeRangeAverage data={data} /> */}
+                            <MakeRangeAverage data={data} />
                         </Col>
                         </Row>
                         </Container>
-                        {/* <MakeRangeChart data={data} /> */}
+                        <MakeRangeChart data={data} />
             </React.Fragment>
             )
         }

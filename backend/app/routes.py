@@ -88,6 +88,9 @@ class GetRangeData(Resource):
     end_date_obj = parse(end_date)
     while start_date_obj <= end_date_obj:
       data = Reading.query.filter_by(username=username, reading_date=start_date_obj).all()
+      if len(data) == 0:
+        start_date_obj += timedelta(days=1) 
+        continue
       avg = sum(d.my_reading for d in data) / len(data)
       ret_data.append({'reading_date': start_date_obj.strftime('%m/%d/%Y'), 'avg': round(avg, 2)})
       start_date_obj += timedelta(days=1) 
