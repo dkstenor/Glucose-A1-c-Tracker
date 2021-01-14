@@ -24,7 +24,7 @@ function MakeChart(props) {
         },
         xAxis: {
           categories: 
-            props.data.map(dataItem => 
+            props.data.ret.map(dataItem => 
               tConv24(dataItem.reading_time))
           
         },
@@ -47,7 +47,7 @@ function MakeChart(props) {
         series: [
           {
             name: "Daily Readings",
-            data: props.data.map(dataItem => 
+            data: props.data.ret.map(dataItem => 
               dataItem.my_reading)
           }
         ]

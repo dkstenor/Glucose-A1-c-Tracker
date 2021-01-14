@@ -13,7 +13,7 @@ function MakeRangeChart(props) {
         },
         xAxis: {
           categories: 
-            props.data.map(dataItem => 
+            props.data.ret.map(dataItem => 
               dataItem.reading_date)
           
         },
@@ -36,7 +36,7 @@ function MakeRangeChart(props) {
         series: [
           {
             name: "Daily Readings",
-            data: props.data.map(dataItem => 
+            data: props.data.ret.map(dataItem => 
               dataItem.avg)
           }
         ]

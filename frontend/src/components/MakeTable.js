@@ -15,6 +15,7 @@ function MakeTable (props) {
 
     return (
         <React.Fragment>
+            {console.log(props)}
                 <Table responsive striped size='sm' bordered id='readingTable'>
                     <thead>
                         <tr>
@@ -27,7 +28,7 @@ function MakeTable (props) {
                         </tr>
                     </thead>
                     <tbody>
-                        {props.data.map(dataItem => 
+                        {props.data.ret.map(dataItem => 
                         <tr>
                             <td style={{textAlign: 'center'}}>{tConv24(dataItem.reading_time)}</td>
                             <td style={{textAlign: 'center'}}>{dataItem.my_reading}</td>

@@ -73,7 +73,8 @@ class GetDateData(Resource):
       return {"message": "No Data Found for Date"}, 500
     reading_schema = ReadingSchema(many=True)
     ret_data = reading_schema.dump(data)
-    return ret_data
+    avg = sum(d.my_reading for d in data) / len(data)
+    return {'ret': ret_data, 'avg': round(avg, 2)}
 
 
 class GetRangeData(Resource):
@@ -96,7 +97,7 @@ class GetRangeData(Resource):
       start_date_obj += timedelta(days=1) 
     if not data:
       return {"message": "No Data Found for Date"}, 500
-    return ret_data
+    return {'ret': ret_data, 'avg': round(avg, 2)}
 
 # @app.route("/")
 # def hello():

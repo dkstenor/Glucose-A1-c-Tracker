@@ -13,7 +13,7 @@ function MakeAverage(props) {
     
     return(
         <React.Fragment>
-            Average Glucose: {calcAverage()}
+            Average Glucose: {props.data.avg}
             
         </React.Fragment>
     )

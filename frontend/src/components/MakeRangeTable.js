@@ -8,19 +8,19 @@ function MakeRangeTable (props) {
                 <Table striped size='sm' bordered id='readingTable'>
                     <thead>
                         <tr>
-                            <th>
+                            <th style={{textAlign: 'center'}}>
                                 Reading Date
                             </th>
-                            <th>
+                            <th style={{textAlign: 'center'}}>
                                 Average Reading
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        {props.data.map(dataItem => 
+                        {props.data.ret.map(dataItem => 
                         <tr>
-                            <td>{dataItem.reading_date}</td>
-                            <td>{dataItem.avg}</td>
+                            <td style={{textAlign: 'center'}}>{dataItem.reading_date}</td>
+                            <td style={{textAlign: 'center'}}>{dataItem.avg.toFixed(2)}</td>
                         </tr>
                         )
                         }

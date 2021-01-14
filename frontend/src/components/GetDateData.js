@@ -12,7 +12,10 @@ function GetDateData () {
 
     const [dateValue, onDateChange] = useState(new Date());
 
-    const [data, setData] = useState([]);
+    const [data, setData] = useState({
+        ret: [],
+        avg: 0
+    });
 
     const [isClicked, setIsClicked] = useState(false);
 
@@ -47,6 +50,7 @@ function GetDateData () {
         if(isClicked) {
             return(
                 <React.Fragment>
+                    {console.log(data.ret)}
                     <PageHeader>Glucose Readings for {moment(dateValue).format('MM/DD/YYYY')}</PageHeader>
                 <Container>
                     <Row>

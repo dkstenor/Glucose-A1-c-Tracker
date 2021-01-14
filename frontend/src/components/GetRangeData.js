@@ -12,8 +12,10 @@ function GetRangeData () {
 
     const [dateValue, onDateChange] = useState([new Date(), new Date()]);
 
-    const [data, setData] = useState([]);
-
+    const [data, setData] = useState({
+        ret: [],
+        avg: 0
+    });
     const [isClicked, setIsClicked] = useState(false);
 
     const [errorMsg, setErrorMsg] = useState({
