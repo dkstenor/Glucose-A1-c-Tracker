@@ -6,8 +6,7 @@ from flask_restful import Resource, Api, abort, reqparse
 from flask_marshmallow import Marshmallow
 
 
-# app = Flask(__name__)
-app = Flask(__name__ ,static_folder='../frontend/build',static_url_path='')
+app = Flask(__name__)
 app.config.from_object(Config)
 db = SQLAlchemy(app)
 ma = Marshmallow(app)

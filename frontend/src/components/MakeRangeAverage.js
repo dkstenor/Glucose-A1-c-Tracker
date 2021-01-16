@@ -8,7 +8,7 @@ function MakeRangeAverage(props) {
 
     return(
         <React.Fragment>
-            Average Glucose: {props.data.avg.toFixed(2)} <br />
+            Average Glucose: {props.data.avg} <br />
             Approx. A1C: {calcA1C()}
         </React.Fragment>
     )

@@ -16,6 +16,7 @@ function GetRangeData () {
         ret: [],
         avg: 0
     });
+    
     const [isClicked, setIsClicked] = useState(false);
 
     const [errorMsg, setErrorMsg] = useState({
