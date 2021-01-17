@@ -54,8 +54,8 @@ class AddReading(Resource):
       reading_date = req_data['readingDate']
       reading_time = req_data['readingTime']
       date_time_obj = parse(reading_date)
-      reading_date = date_time_obj.date()
-      new_reading = Reading(username=username, my_reading=reading, reading_date=reading_date, reading_time=reading_time)
+      date_obj = date_time_obj.date()
+      new_reading = Reading(username=username, my_reading=reading, reading_date=date_obj, reading_time=reading_time)
       db.session.add(new_reading)
       db.session.commit()
       return {"message": "Reading successfully added"}, 200
