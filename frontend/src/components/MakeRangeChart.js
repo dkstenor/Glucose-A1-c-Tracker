@@ -37,7 +37,7 @@ function MakeRangeChart(props) {
           {
             name: "Daily Readings",
             data: props.data.ret.map(dataItem => 
-              dataItem.avg)
+              dataItem.day_avg)
           }
         ]
       };

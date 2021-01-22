@@ -14,7 +14,7 @@ function GetRangeData () {
 
     const [data, setData] = useState({
         ret: [],
-        avg: 0
+        day_avg: 0
     });
     
     const [isClicked, setIsClicked] = useState(false);
@@ -31,10 +31,12 @@ function GetRangeData () {
     function handleSubmit(event) {
         event.preventDefault();
         setIsClicked(true);
-        axios.post('/getrangedata', {
+        axios.get('/getrangedata', {
+            params: {
             username: sessionStorage.getItem('username'),
             startdate: dateValue[0],
             enddate: dateValue[1]
+            }
           })
           .then(handleResponse)
         }
@@ -82,7 +84,9 @@ function GetRangeData () {
                     <Row>
                         <Col></Col>
                         <Col md={4}>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <Button
+                                    size = "md"
                                     className="mx-auto mb-3"
                                     variant="outline-dark"
                                     style={{ backgroundColor: "lavender", color: "black" }}

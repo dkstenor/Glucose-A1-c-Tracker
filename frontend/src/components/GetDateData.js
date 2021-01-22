@@ -35,9 +35,11 @@ function GetDateData () {
     function handleSubmit(event) {
         event.preventDefault();
         setIsClicked(true);
-        axios.post('/getdatedata', {
-            username: sessionStorage.getItem('username'),
-            date: dateValue
+        axios.get('/getdatedata', {
+            params: {
+                username: sessionStorage.getItem('username'),
+                date: dateValue 
+            }
           })
           .then(handleResponse)
           .catch(error => {

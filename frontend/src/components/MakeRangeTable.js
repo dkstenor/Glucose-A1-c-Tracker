@@ -20,7 +20,7 @@ function MakeRangeTable (props) {
                         {props.data.ret.map(dataItem => 
                         <tr>
                             <td style={{textAlign: 'center'}}>{dataItem.reading_date}</td>
-                            <td style={{textAlign: 'center'}}>{dataItem.avg.toFixed(2)}</td>
+                            <td style={{textAlign: 'center'}}>{dataItem.day_avg.toFixed(2)}</td>
                         </tr>
                         )
                         }

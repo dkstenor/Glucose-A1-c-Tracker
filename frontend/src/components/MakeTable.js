@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Button, Table } from "reactstrap";
+import { Table } from "reactstrap";
 
 function MakeTable (props) {
 

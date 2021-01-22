@@ -63,14 +63,15 @@ class AddReading(Resource):
       return {"message": "Error adding reading"}, 500
 
 class GetDateData(Resource):
-  def post(self):
-    req_data = request.get_json()
-    username = req_data['username']
-    readingdate = req_data['date']
+  def get(self):
+    username = request.args.get('username')
+    readingdate = request.args.get('date')
     date_obj = parse(readingdate)
+    # ORM query
     data = Reading.query.filter_by(username=username, reading_date=date_obj).all()
     if not data:
       return {"message": "No Data Found for Date"}, 500
+    # The reading schema (through Marshmallow) converts the Python data structure to JSON format
     reading_schema = ReadingSchema(many=True)
     ret_data = reading_schema.dump(data)
     avg = sum(d.my_reading for d in data) / len(data)
@@ -78,13 +79,19 @@ class GetDateData(Resource):
 
 
 class GetRangeData(Resource):
-  def post(self):
+  def get(self):
     ret_data = []
-    avg = 0
-    req_data = request.get_json()
-    username = req_data['username']
-    start_date = req_data['startdate']
-    end_date = req_data['enddate']
+    day_avg = 0
+    range_count = 0
+    range_total = 0
+    range_avg = 0
+    # req_data = request.get_json()
+    # username = req_data['username']
+    # start_date = req_data['startdate']
+    # end_date = req_data['enddate']
+    username = request.args.get('username')
+    start_date = request.args.get('startdate')
+    end_date = request.args.get('enddate')
     start_date_obj = parse(start_date)
     end_date_obj = parse(end_date)
     while start_date_obj <= end_date_obj:
@@ -92,12 +99,17 @@ class GetRangeData(Resource):
       if len(data) == 0:
         start_date_obj += timedelta(days=1) 
         continue
-      avg = sum(d.my_reading for d in data) / len(data)
-      ret_data.append({'reading_date': start_date_obj.strftime('%m/%d/%Y'), 'avg': round(avg, 2)})
+      total = sum(d.my_reading for d in data)
+      day_avg = total / len(data)
+      ret_data.append({'reading_date': start_date_obj.strftime('%m/%d/%Y'), 'day_avg': round(day_avg, 2)})
       start_date_obj += timedelta(days=1) 
     if not data:
       return {"message": "No Data Found for Date"}, 500
-    return {'ret': ret_data, 'avg': round(avg, 2)}
+    while range_count < len(ret_data):
+      range_total = range_total + ret_data[range_count]['day_avg']
+      range_count += 1
+    range_avg = range_total / range_count
+    return {'ret': ret_data, 'range_avg': round(range_avg, 2)}
 
 # @app.route("/")
 # def hello():
