@@ -21,7 +21,7 @@ function PageHeader(props) {
             
                 <Jumbotron fluid style={{backgroundColor: "lavender", height: "150px"}}>
                     <Container fluid>
-                        <h1 className="display-3">{props.children}</h1>
+                        <span className="display-4">{props.children}</span>
                     </Container>
                 </Jumbotron>
             </header>

@@ -7,6 +7,7 @@ import PageHeader from './PageHeader';
 import MakeTable from './MakeTable';
 import MakeAverage from './MakeAverage';
 import MakeChart from './MakeChart';
+import NewReading from './NewReading';
 
 function GetDateData () {
 
@@ -25,10 +26,10 @@ function GetDateData () {
     })
 
     function handleResponse(response) {
-        setErrorMsg({
-            errorNo: '',
-            errorText: ''
-        });
+        // setErrorMsg({
+        //     errorNo: '',
+        //     errorText: ''
+        // });
         setData(response.data)
     }
 
@@ -52,16 +53,18 @@ function GetDateData () {
         if(isClicked) {
             return(
                 <React.Fragment>
-                    {console.log(data.ret)}
+
                     <PageHeader>Glucose Readings for {moment(dateValue).format('MM/DD/YYYY')}</PageHeader>
                 <Container>
+                    <h3 style={{ color: "red", textAlign: "center" }}>{errorMsg.errorText}</h3>
                     <Row>
                         <Col md={4}></Col>
                         <Col md={3}>
                             <MakeTable data={data} />
                         </Col>
-                        <Col md={2}>
-                            <MakeAverage data={data} />
+                        <Col md={4}>
+                            <MakeAverage data={data} /><br />
+                            <NewReading />
                         </Col>
                         <Col md={4}></Col>
                         </Row>

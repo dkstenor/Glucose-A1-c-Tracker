@@ -70,7 +70,7 @@ class GetDateData(Resource):
     # ORM query
     data = Reading.query.filter_by(username=username, reading_date=date_obj).all()
     if not data:
-      return {"message": "No Data Found for Selected Date"}, 500
+      return {"message": "No Data Found for Date"}, 500
     # The reading schema (through Marshmallow) converts the Python data structure to JSON format
     reading_schema = ReadingSchema(many=True)
     ret_data = reading_schema.dump(data)
@@ -85,39 +85,26 @@ class GetRangeData(Resource):
     range_count = 0
     range_total = 0
     range_avg = 0
-    total = 0
-    count = 0
     # req_data = request.get_json()
     # username = req_data['username']
     # start_date = req_data['startdate']
     # end_date = req_data['enddate']
-    uname = request.args.get('username')
+    username = request.args.get('username')
     start_date = request.args.get('startdate')
     end_date = request.args.get('enddate')
     start_date_obj = parse(start_date).date()
     end_date_obj = parse(end_date).date()
-    # while start_date_obj <= end_date_obj:
-    #   data = Reading.query.filter_by(username=username, reading_date=start_date_obj).all()
-    #   if len(data) == 0:
-    #     start_date_obj += timedelta(days=1) 
-    #     continue
-    #   total = sum(d.my_reading for d in data)
-    #   day_avg = total / len(data)
-    #   ret_data.append({'reading_date': start_date_obj.strftime('%m/%d/%Y'), 'day_avg': round(day_avg, 2)})
-    #   start_date_obj += timedelta(days=1) 
-    data = Reading.query.filter(Reading.username == uname, Reading.reading_date.between(start_date_obj, end_date_obj)).all()
-    if not data:
-      return {"message": "No Data Found for Selected Range"}, 500
-
     while start_date_obj < end_date_obj:
-      for d in data:
-        if d.reading_date == start_date_obj:
-          total = total + d.my_reading
-          count = count + 1
-      day_avg = total / count
+      data = Reading.query.filter_by(username=username, reading_date=start_date_obj).all()
+      if len(data) == 0:
+        start_date_obj += timedelta(days=1) 
+        continue
+      total = sum(d.my_reading for d in data)
+      day_avg = total / len(data)
       ret_data.append({'reading_date': start_date_obj.strftime('%m/%d/%Y'), 'day_avg': round(day_avg, 2)})
       start_date_obj += timedelta(days=1) 
-
+    if not data:
+      return {"message": "No Data Found for Date"}, 500
     while range_count < len(ret_data):
       range_total = range_total + ret_data[range_count]['day_avg']
       range_count += 1

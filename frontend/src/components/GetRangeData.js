@@ -7,6 +7,7 @@ import PageHeader from './PageHeader';
 import MakeRangeTable from './MakeRangeTable';
 import MakeRangeAverage from './MakeRangeAverage';
 import MakeRangeChart from './MakeRangeChart';
+import NewReading from './NewReading';
 
 function GetRangeData () {
 
@@ -39,13 +40,20 @@ function GetRangeData () {
             }
           })
           .then(handleResponse)
-        }
+          .catch(error => {
+            setErrorMsg({
+                errorNo: error.response.status,
+                errorText: error.response.data.message
+            });
+        })
+      }
 
         if(isClicked) {
             return(
                 <React.Fragment>
                     <PageHeader>Glucose Readings for {moment(dateValue[0]).format('MM/DD/YYYY')} - {moment(dateValue[1]).format('MM/DD/YYYY')}</PageHeader>
                 <Container>
+                    <h3 style={{ color: "red", textAlign: "center" }}>{errorMsg.errorText}</h3>
                     <Row>
                         <Col></Col>
                         <Col>
@@ -54,6 +62,8 @@ function GetRangeData () {
                         </Col>
                         <Col>
                             <MakeRangeAverage data={data} />
+                            <br />
+                            <NewReading />
                         </Col>
                         </Row>
                         </Container>
